@@ -7,8 +7,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-import java.nio.file.Paths;
-
 public abstract class BaseTest {
 
     public WebDriver driver;
@@ -19,19 +17,20 @@ public abstract class BaseTest {
         WebDriverManager.chromedriver().setup();
 
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless=new");
-        options.addArguments("--no-sandbox");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--window-size=1920,1080");
+
+        // Detecta se está rodando na CI
+        String ci = System.getenv("CI");
+
+        if (ci != null) {
+            options.addArguments("--headless=new");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
+        }
 
         driver = new ChromeDriver(options);
+        driver.manage().window().maximize();
 
-        String caminho = Paths.get("sistema/login.html")
-                .toAbsolutePath()
-                .toUri()
-                .toString();
-
-        driver.get(caminho);
+        driver.get("https://duckduckgo.com/");
     }
 
     @AfterEach
