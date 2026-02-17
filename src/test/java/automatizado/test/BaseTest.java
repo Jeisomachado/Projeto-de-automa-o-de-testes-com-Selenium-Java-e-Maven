@@ -4,8 +4,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import io.github.bonigarcia.wdm.WebDriverManager;
+
+import java.io.File;
 
 public abstract class BaseTest {
 
@@ -15,22 +16,14 @@ public abstract class BaseTest {
     public void deve_iniciar() {
 
         WebDriverManager.chromedriver().setup();
-
-        ChromeOptions options = new ChromeOptions();
-
-        // Detecta se está rodando na CI
-        String ci = System.getenv("CI");
-
-        if (ci != null) {
-            options.addArguments("--headless=new");
-            options.addArguments("--no-sandbox");
-            options.addArguments("--disable-dev-shm-usage");
-        }
-
-        driver = new ChromeDriver(options);
+        driver = new ChromeDriver();
         driver.manage().window().maximize();
 
-        driver.get("https://duckduckgo.com/");
+        // Caminho dinâmico do projeto (funciona Windows e Linux)
+        String caminho = System.getProperty("user.dir") + File.separator + 
+                         "sistema" + File.separator + "login.html";
+
+        driver.get("file:///" + caminho);
     }
 
     @AfterEach
