@@ -22,11 +22,15 @@ public abstract class BaseTest {
         options.addArguments("--headless=new");
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--window-size=1920,1080");
 
         driver = new ChromeDriver(options);
 
-        // Caminho dinâmico (funciona Windows e Linux)
-        String caminho = Paths.get("sistema/login.html").toAbsolutePath().toUri().toString();
+        String caminho = Paths.get("sistema/login.html")
+                .toAbsolutePath()
+                .toUri()
+                .toString();
+
         driver.get(caminho);
     }
 
