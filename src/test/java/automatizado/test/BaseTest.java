@@ -4,7 +4,10 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import io.github.bonigarcia.wdm.WebDriverManager;
+
+import java.nio.file.Paths;
 
 public abstract class BaseTest {
 
@@ -12,12 +15,19 @@ public abstract class BaseTest {
 
     @BeforeEach
     public void deve_iniciar() {
+
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();  // usa o driver da classe, não cria local
-        driver.manage().window().maximize();
-        driver.get("file:///C:/SeleniumGoogle/automatizado/sistema/login.html");
-        //**
-        // driver.get("https://duckduckgo.com/");
+
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless=new");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+
+        driver = new ChromeDriver(options);
+
+        // Caminho dinâmico (funciona Windows e Linux)
+        String caminho = Paths.get("sistema/login.html").toAbsolutePath().toUri().toString();
+        driver.get(caminho);
     }
 
     @AfterEach
