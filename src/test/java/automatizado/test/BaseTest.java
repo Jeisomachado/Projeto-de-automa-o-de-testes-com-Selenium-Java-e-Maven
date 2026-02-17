@@ -15,7 +15,9 @@ public abstract class BaseTest {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();  // usa o driver da classe, não cria local
         driver.manage().window().maximize();
-        driver.get("https://duckduckgo.com/");
+        driver.get("file:///C:/SeleniumGoogle/automatizado/sistema/login.html");
+        //**
+        // driver.get("https://duckduckgo.com/");
     }
 
     @AfterEach
