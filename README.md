@@ -13,6 +13,8 @@
  2.3 Criar um metodo inicial que saiba instanciar um PO de login.
  2.4 Criar os testes baseados na planilha. 
   2.4.1 Não deve logar no sistema com usuario e senha brancos.
+  2.4.2 Não deve logar mo sistema com usuario e senha vazio.
+  2.4.3 Não deve logar no sistema com usuario vaziom e senha incorreta.
   
 
 

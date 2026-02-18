@@ -13,7 +13,7 @@ import automatizado.pages.LoginPO;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class LoginTest extends BaseTest {
 
-    private LoginPO loginPage;
+    private static LoginPO loginPage;
 
     @BeforeEach
     public void prepararTest() {
