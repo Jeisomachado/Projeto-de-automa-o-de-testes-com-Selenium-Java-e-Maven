@@ -27,8 +27,9 @@ public class GooglePO {
     /**
      * Campo de pesquisa do Google.
      */
-    @FindBy(id = "searchbox_input")
-    private WebElement inputPesquisa;
+  @FindBy(name = "q")
+private WebElement inputPesquisa;
+
 
     /**
      * Elemento que representa o resultado contendo o texto "Protegido".
